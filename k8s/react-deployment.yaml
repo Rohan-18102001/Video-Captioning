@@ -14,19 +14,17 @@ spec:
     spec:
       containers:
       - name: reactapp
-        image: myreactapp:latest
+        image: rohanpatidar18/reactapp:09 
+        env:
+          - name: REACT_APP_FLASK_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: project-config
+                key: REACT_APP_FLASK_HOST
+          - name: REACT_APP_FLASK_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: project-config
+                key: REACT_APP_FLASK_PORT
         ports:
-        - containerPort: 5000
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: reactapp-service
-spec:
-  selector:
-    app: reactapp
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 5000
-  type: LoadBalancer
+        - containerPort: 5000  
