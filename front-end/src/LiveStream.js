@@ -8,6 +8,10 @@ function LiveStream() {
   const [processedFrameUrl, setProcessedFrameUrl] = useState(null);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
+  const flaskHost = process.env.REACT_APP_FLASK_HOST || 'localhost';
+  const flaskPort = process.env.REACT_APP_FLASK_PORT || '5000';
+  console.log('FLASK_HOST:', process.env.REACT_APP_FLASK_HOST);
+  console.log('FLASK_PORT:', process.env.REACT_APP_FLASK_PORT);
 
   // Function to access the user's camera
   async function handleStartCamera() {
@@ -71,7 +75,7 @@ function LiveStream() {
     formData.append('frame', blob);
 
     try {
-      const response = await fetch('http://localhost:5000/process-frame', {
+      const response = await fetch(`http://${flaskHost}:${flaskPort}/process-frame`, {
         method: 'POST',
         body: formData,
       });
