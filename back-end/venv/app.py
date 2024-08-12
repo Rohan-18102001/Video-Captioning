@@ -15,6 +15,12 @@ FINAL_FOLDER = 'final'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(FINAL_FOLDER, exist_ok=True)
 
+@app.route('/', methods=['GET'])
+def check_health():
+    return jsonify({"message": "Good health"}), 200
+
+   
+
 @app.route('/process-frame', methods=['POST'])
 def process_frame():
     if 'frame' not in request.files:
