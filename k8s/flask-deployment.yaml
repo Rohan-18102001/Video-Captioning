@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: flaskapp
-        image: rohanpatidar18/flaskapp:05  # Ensure this image exists in Minikube's Docker environment
+        image: rohanpatidar18/flaskapp:12  # Ensure this image exists in Minikube's Docker environment
         ports:
         - containerPort: 3000
