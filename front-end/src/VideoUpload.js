@@ -5,8 +5,15 @@ function VideoUpload() {
   const [caption, setCaption] = useState('');
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
-
+  const flaskHost = process.env.REACT_APP_FLASK_HOST || 'localhost';
+  const flaskPort = process.env.REACT_APP_FLASK_PORT || '5000';
+  console.log('FLASK_HOST:', process.env.REACT_APP_FLASK_HOST);
+  console.log('FLASK_PORT:', process.env.REACT_APP_FLASK_PORT);
+  const apiUrl = `http://${flaskHost}.default.svc.cluster.local:${flaskPort}/upload-chunk`;
+  console.log(`${apiUrl}`)
   function handleUpload(event) {
+    
+    console.log('API URL:', apiUrl);
     const file = event.target.files[0];
     if (!file) return;
 
@@ -22,7 +29,7 @@ function VideoUpload() {
 
       console.log(`Uploading chunk ${chunkIndex + 1}/${totalChunks}`);
 
-      fetch('http://localhost:5000/upload-chunk', {
+      fetch(`http://${flaskHost}.default.svc.cluster.local:${flaskPort}/upload-chunk`, {
         method: 'POST',
         body: formData,
       })
@@ -47,7 +54,7 @@ function VideoUpload() {
           setCaption('All chunks uploaded successfully.');
           setUploading(false);
           // Notify the server to reassemble the chunks
-          fetch('http://localhost:5000/reassemble-video', {
+          fetch(`http://${flaskHost}:${flaskPort}/reassemble-video`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
