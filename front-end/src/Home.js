@@ -3,10 +3,10 @@ import './App.css';
 
 function Home() {
     const [response, setResponse] = useState('');
-    const flaskHost = process.env.REACT_APP_FLASK_HOST || 'flaskapp-service';
+    const flaskHost = process.env.REACT_APP_FLASK_HOST || 'localhost';
     const flaskPort = process.env.REACT_APP_FLASK_PORT || '5000';
-    const apiUrl = `http://${flaskHost}:${flaskPort}/`;
-    
+    const apiUrl1 = `http://${flaskHost}:${flaskPort}/`;
+    const apiUrl = 'http://10.14.97.93:5000'
     function checkHealth(event) {
     console.log('API URL:', apiUrl);
 

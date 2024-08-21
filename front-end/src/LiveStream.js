@@ -8,7 +8,7 @@ function LiveStream() {
   const [processedFrameUrl, setProcessedFrameUrl] = useState(null);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
-  const flaskHost = process.env.REACT_APP_FLASK_HOST || 'localhost';
+  const flaskHost = process.env.REACT_APP_FLASK_HOST || '10.14.97.93';
   const flaskPort = process.env.REACT_APP_FLASK_PORT || '5000';
   console.log('FLASK_HOST:', process.env.REACT_APP_FLASK_HOST);
   console.log('FLASK_PORT:', process.env.REACT_APP_FLASK_PORT);
